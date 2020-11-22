@@ -48,6 +48,6 @@
 2. #### Connections error
    * while providing the inter connections please provide within the range of maximum number of connections
      #####   Explanation  
-         * if the value is 6 you can provide Alphabets below its Assic-65 value.
+         * if the value is 6 you can provide Alphabets below its ASCII-65 value.
          * A,B,C,D,E,F-0,1,2,3,4,5
-         * if let say you provide H which gives value as 7 (ASSCII-65) it gives Array index out of bounds error
+         * if let say you provide H which gives value as 7 (ASCII-65) it gives Array index out of bounds error
