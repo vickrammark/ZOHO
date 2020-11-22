@@ -1,4 +1,5 @@
 
+import java.awt.datatransfer.SystemFlavorMap;
 import java.nio.file.Path;
 import java.util.*;
 class Passenger
@@ -41,7 +42,47 @@ class Passenger
 	}
 	 	
 }
-public class HyperloopPassengerBooking {
+class Error
+{
+
+
+	public void numberError() {
+        System.out.println("Please provide a number!!");		
+		
+	}
+
+	public void alphabetError() {
+        System.out.println("Please provide a alphabet!!");				
+	}
+
+	public void unRecongonizedError() {
+		System.out.println("Sorry the command cannot be recongonized");
+	}
+
+	public void commandError() {
+		System.out.println("Sorry the command cannot be executed now!!!");
+	}
+
+	public void reintializeError() {
+        System.out.println("Hey you have already provided a connection to intialize again type 'EXIT' command and re-run your app");
+		
+	}
+
+	public void intializeError() {
+		System.out.println("Sorry you cannot do any operaiont without intailizing");
+	}
+
+	public void pathNotFound() {
+		  System.out.println("Sorry there is no connections provided till now for destination");	
+	}
+	
+	public void uncheckedError()
+	{
+		System.out.println("Sorry an unkown error occured!!!");
+	}
+	
+}
+public class HyperloopPassengerBooking extends Error{
  
 	private static int node;
 	private static LinkedList<Integer>adj[];
@@ -50,12 +91,13 @@ public class HyperloopPassengerBooking {
 	private static HyperloopPassengerBooking booking;
 	private  ArrayList<Integer> shortestPathList=new ArrayList<Integer>();
 	private static List<Passenger>printQList=new LinkedList<Passenger>();
-	
+	private static Error error;
 	
 	public static void main(String args[])
 	{
 		Scanner sc=new Scanner(System.in);
 		booking=new HyperloopPassengerBooking();
+		error=new Error();
 		int id=0;
 		int a=1;
 		while(a==1)
@@ -66,10 +108,21 @@ public class HyperloopPassengerBooking {
 		int source=0;
 		if(intializeArray[0].equals("INIT"))
 		{
-		booking.getInterConnection(intializeArray[0],intializeArray[1]);
-		booking.setInterConnection(sc);
-		sourceString=intializeArray[2];
-		source=(int)sourceString.charAt(0)-65;
+			if(!intializeArray[1].matches("[0-9]"))
+			{
+				error.numberError();
+			}
+			else if(!intializeArray[2].matches("[A-Z]"))
+			{
+			    error.alphabetError();	
+			}
+			else
+			{
+		    booking.getInterConnection(intializeArray[0],intializeArray[1]);
+		    booking.setInterConnection(sc);
+	     	sourceString=intializeArray[2];
+	       	source=(int)sourceString.charAt(0)-65;
+			}
 		}
 		else if(intializeArray[0].equals("ADD_PASSENGER"))
 		{
@@ -91,12 +144,12 @@ public class HyperloopPassengerBooking {
 		}
 		else if(intializeArray[0].equals("EXIT"))
 		{
-			System.out.println("Hey buddy!! thank you for using out app,Come again soon");
+			System.out.println("Hey buddy!! thank you for using our app,Come again soon");
 			a=0;
 		}
 		else 
 		{
-			System.out.println("Sorry Command Not Recongonized!!");
+			error.unRecongonizedError();
 		}
 		}
 	}
@@ -105,9 +158,16 @@ public class HyperloopPassengerBooking {
 	
 	public LinkedList<Integer>[] getInterConnection(String command,String nodes)
 	{
+		
+		 if(command.equals("PRINT_Q")||command.equals("START_POD")||command.equals("ADD_PASSENGER"))
+		 {
+			 error.commandError();
+			 return null;
+		 }
+
 		   if(passengers.size()>0)
 		   {
-			   System.out.println("Hey you have already provided a connection to intialize again type 'EXIT' command and re-run your app");
+			   error.reintializeError();
 			   return null;
 		   }
 			node=Integer.parseInt(nodes);
@@ -133,10 +193,20 @@ public class HyperloopPassengerBooking {
 			 String coordinatesArray[]=coordinates.split(" ");
 			 String uTemp=coordinatesArray[0];
 			 String vTemp=coordinatesArray[1];
+			 if(!uTemp.matches("[A-Z]" )|| !vTemp.matches("[A-Z]"))
+			 {
+				 error.alphabetError();
+				 break;
+			 }
+			 else
+			 {
 			 int u=(int)uTemp.charAt(0)-65;
 			 int v=(int)vTemp.charAt(0)-65;
+			 {
 			 adj[u].add(v);
-		 }
+			 }
+			 }
+		  }
 		}
 
 	}
@@ -152,7 +222,7 @@ public class HyperloopPassengerBooking {
 		       printQList.add(passenger);
 				if(printQList.size()==0)
 				{
-					System.out.println("Sorry you cannot add passengers without intializing any interconnections!!");
+				  error.intializeError();	
 				}
 
 		       Passenger temp;
@@ -188,7 +258,8 @@ public class HyperloopPassengerBooking {
 			 String passengerArray[]=passenger.split(" ");
 			 if(passengerArray[0].equals("PRINT_Q")||passengerArray[0].equals("START_POD")||passengerArray[0].equals("ADD_PASSENGER")||passengerArray[0].equals("INIT"))
 			 {
-				 System.out.println("Please provide the passsenger details you can't do any operation now !!");
+				 error.intializeError();
+				 break;
 			 }
 			 else
 			 {
@@ -210,11 +281,11 @@ public class HyperloopPassengerBooking {
 		
 		if(printQList.size()==0)
 		{
-			System.out.println("Sorry you cannot start pod without intializing any interconnections!!");
+			error.intializeError();
 		}
 		else if(passengers.size()==0)
 		{
-			System.out.println("Sorry you have not provided any passengers!!!");
+			error.intializeError();
 		}
 		else
 		{
@@ -263,10 +334,10 @@ public class HyperloopPassengerBooking {
 			int charachter=shortestPathList.get(j)+65;
 			path=path+String.valueOf((char)(charachter))+" ";
 		}
-		System.out.println("Path="+path+" ,dest="+destination);
 		if(!path.contains(destination) || path.equals(""))	
 		{
-			  System.out.println("Sorry there is no connections provided till now for destination");	
+			error.pathNotFound();
+			break;
 		}
 		else
 		{
@@ -315,7 +386,7 @@ public class HyperloopPassengerBooking {
 	{
 		if(printQList.size()==0)
 		{
-			System.out.println("Sorry you cannot print without intializing any interconnections!!");
+			error.intializeError();
 		}
 		else
 		{
