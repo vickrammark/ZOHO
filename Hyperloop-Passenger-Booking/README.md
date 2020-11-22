@@ -13,7 +13,7 @@
 
 ## Commands usage
 1. ### INIT
- INIT 7 A
+ Example-[INIT 7 A]
 | Syntax | Description |
 | ----------- | ----------- |
 | INIT | Initalize the interconnection of the hyperloop |
