@@ -14,11 +14,7 @@
 ## Commands usage
 1. ### INIT
  INIT 7 A
- 	```
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
-```
-
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
