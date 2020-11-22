@@ -16,5 +16,6 @@
  INIT 7 A
 | Syntax | Description |
 | ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
+| INIT | Initalize the interconnection of the hyperloop |
+| 7 | The maximum number of connections that the hyperloop can have |
+| A | This is the starting position or station of the hyperloop |
