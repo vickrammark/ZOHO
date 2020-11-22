@@ -10,3 +10,6 @@
 2. ADD_PASSENGER-This command helps to add the passengers.
 3. START_POD-This command start the pod(only one person can travel at a time).
 4. PRINT_Q-This command print the remaning person waiting in queue in name and age format.
+
+## Commands usage
+1. ### INIT
