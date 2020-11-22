@@ -19,3 +19,24 @@
 | INIT | Initalize the interconnection of the hyperloop |
 | 7 | The maximum number of connections that the hyperloop can have |
 | A | This is the starting position or station of the hyperloop |
+
+2. ### ADD_PASSENGER
+ Example-[ADD_PASSENGER 2](#)
+| Syntax | Description |
+| ----------- | ----------- |
+| ADD_PASSENGER | Initalize the interconnection of the hyperloop |
+| 2 | The maximum number of passengers the patient can be added |
+
+3. ### START_POD
+ Example-[START_POD 2](#)
+| Syntax | Description |
+| ----------- | ----------- |
+| START_POD | This will start the pod |
+| 2 | The maximum number of highest age passengers who have travel in the pods |
+
+4. ### PRINT_Q
+ Example-[PRINT_Q](#)
+| Syntax | Description |
+| ----------- | ----------- |
+| PRINT_Q | This will print the remaining passengers in the queue |
+
